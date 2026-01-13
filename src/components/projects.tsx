@@ -84,7 +84,7 @@ const Projects: React.FC = () => {
                 <h3 className="text-2xl font-semibold">{project.title}</h3>
                 <p className="text-gray-400">{project.description}</p>
                 <a
-                  href={project.link}
+                  href={"https://github.com/NSang22/3d-portfolio-starter/commits/main/"}
                   target="_blank"
                   className="inline-block mt-4 text-[#04D9FF] hover:underline"
                 >
