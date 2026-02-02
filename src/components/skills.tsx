@@ -14,7 +14,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ title, items }) => {
       transition={{ duration: 0.6 }}
       className="rounded-xl border border-gray-800 bg-cyan-950/30 backdrop-blur-lg p-6 shadow-lg"
     >
-      <h3 className="text-xl font-semibold text-[#04D9FF]">{title}</h3>
+      <h3 className="text-xl font-semibold text-[#111827]">{title}</h3>
       <ul className="mt-4 flex flex-wrap gap-3">
         {items.map((item) => (
           <li
@@ -33,7 +33,7 @@ const Skills: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 bg-gradient-to-b from-cyan-950/40 via-cyan-900/20 to-transparent"
+      className="relative py-20"
     >
       <div className="max-w-7xl mx-auto px-6">
         <motion.h2
@@ -41,9 +41,9 @@ const Skills: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7 }}
-          className="text-4xl md:text-5xl font-bold text-white text-center"
+          className="text-4xl md:text-5xl font-bold text-white text-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
         >
-          <span className="text-[#04D9FF]">skills</span>
+          <span className="text-[#111827]">skills</span>
         </motion.h2>
 
         <div className="mt-8 grid md:grid-cols-3 gap-8">

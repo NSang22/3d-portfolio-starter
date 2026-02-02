@@ -87,7 +87,11 @@ body {
 }
 
 body {
-  background-color: var(--background);
+  background-image: url("/images/bg_image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: "Proxima Nova", -apple-system, BlinkMacSystemFont,
                "Segoe UI", Roboto, Helvetica, Arial, sans-serif;

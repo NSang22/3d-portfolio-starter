@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="flex justify-center mb-8"
         >
-          <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#04D9FF] shadow-lg">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#111827] shadow-lg">
             <Image
               src="/images/nik_headshot-modified.png"
               alt="Nikhil Sangamkar"
@@ -37,17 +37,17 @@ const Hero: React.FC = () => {
         </motion.div>
 
         {/* Replace your name here */}
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-          hi, i&apos;m <span className="text-[#04D9FF]">Nikhil</span>
+        <h1 className="text-5xl md:text-7xl font-bold leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+          hi, i&apos;m <span className="text-[#111827]">Nikhil</span>
         </h1>
 
         {/* Replace your role or title here */}
-        <h2 className="text-2xl md:text-3xl text-gray-300">
+        <h2 className="text-2xl md:text-3xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           fullstack + ai engineer
         </h2>
 
         {/* Replace this text with your short bio or tagline */}
-        <p className="text-gray-400 max-w-lg mx-auto">
+        <p className="text-white max-w-lg mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           a Computer Science student at the University of Florida with a focus on AI, machine learning, and full-stack development. Aspiring to eventually work in industry research.
         </p>
 
@@ -55,13 +55,13 @@ const Hero: React.FC = () => {
         <div className="flex justify-center space-x-6 pt-6">
           <a
             href="#projects"
-            className="px-6 py-3 bg-[#04D9FF] text-black font-semibold rounded-lg hover:bg-[#00BFFF] transition-all"
+            className="px-6 py-3 bg-[#111827] text-white font-semibold rounded-lg hover:bg-gray-800 transition-all"
           >
             view my work
           </a>
           <a
             href="#contact"
-            className="px-6 py-3 border border-[#04D9FF] text-[#04D9FF] font-semibold rounded-lg hover:bg-[#04D9FF] hover:text-black transition-all"
+            className="px-6 py-3 bg-[#111827] text-white font-semibold rounded-lg hover:bg-gray-800 transition-all"
           >
             contact me
           </a>

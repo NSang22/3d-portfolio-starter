@@ -8,16 +8,16 @@ const EducationSection: React.FC = () => {
   return (
     <section id="education" className="min-h-screen text-white px-8 md:px-16 py-24">
       <ScrollReveal>
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="text-[#04D9FF]">education</span>
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+            <span className="text-[#111827]">education</span>
         </h2>
       </ScrollReveal>
 
       <ScrollReveal delay={0.1}>
-        <div className="max-w-3xl mx-auto bg-gray-900 rounded-xl border border-gray-800 hover:border-[#04D9FF]/50 transition-all shadow-lg hover:shadow-[#04D9FF]/20">
+        <div className="max-w-3xl mx-auto bg-gray-900 rounded-xl border border-gray-800 hover:border-[#111827]/50 transition-all shadow-lg hover:shadow-[#111827]/20">
           <div className="p-6">
             <div className="flex items-center mb-4">
-              <GraduationCap className="text-[#04D9FF] mr-3" size={24} />
+              <GraduationCap className="text-[#111827] mr-3" size={24} />
               <div>
                 <h3 className="text-xl font-bold text-white">University of Florida</h3>
                 <p className="text-gray-300">Bachelors of Science in Computer Science</p>
@@ -30,26 +30,26 @@ const EducationSection: React.FC = () => {
 
             <div className="mb-4">
               <h4 className="font-semibold flex items-center mb-2 text-white">
-                <Award className="text-[#04D9FF] mr-1" size={18} />
+                <Award className="text-[#111827] mr-1" size={18} />
                 Honors & Achievements
               </h4>
-              <div className="flex flex-wrap gap-2 ml-5">
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   Honors Program
                 </span>
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   University Research Scholars Program
                 </span>
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   Presidential Scholar
                 </span>
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   Benacquisto Scholar
                 </span>
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   National Merit Scholar
                 </span>
-                <span className="px-3 py-1 text-sm rounded-md border border-[#04D9FF]/30 bg-[#04D9FF]/10 text-white">
+                <span className="px-3 py-1 text-sm rounded-md border border-[#111827]/30 bg-[#111827]/10 text-white">
                   Deans List
                 </span>
               </div>

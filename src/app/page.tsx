@@ -9,7 +9,7 @@ import Skills from "@/components/skills";
 
 export default function Home() {
   return (
-    <main className="bg-cyan-950 text-white">
+    <main className="text-white bg-cyan-950/40">
       
       <Navbar />
       <Hero />
