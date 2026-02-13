@@ -16,15 +16,17 @@ const EducationSection: React.FC = () => {
       <ScrollReveal delay={0.1}>
         <div className="max-w-3xl mx-auto bg-gray-900 rounded-xl border border-gray-800 hover:border-[#111827]/50 transition-all shadow-lg hover:shadow-[#111827]/20">
           <div className="p-6">
-            <div className="flex items-center mb-4">
-              <GraduationCap className="text-[#111827] mr-3" size={24} />
-              <div>
-                <h3 className="text-xl font-bold text-white">University of Florida</h3>
-                <p className="text-gray-300">Bachelors of Science in Computer Science</p>
+            <div className="flex flex-col md:flex-row md:items-center mb-4">
+              <div className="flex items-center mb-2 md:mb-0">
+                <GraduationCap className="text-white mr-3" size={24} />
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-white">University of Florida</h3>
+                  <p className="text-gray-300 text-sm md:text-base">Bachelors of Science in Computer Science</p>
+                </div>
               </div>
-              <div className="ml-auto text-right">
-                <p className="text-gray-200 font-medium">Expected May 2027</p>
-                <p className="text-gray-200">GPA: 3.72</p>
+              <div className="md:ml-auto md:text-right mt-2 md:mt-0">
+                <p className="text-gray-200 font-medium text-sm md:text-base">Expected May 2027</p>
+                <p className="text-gray-200 text-sm md:text-base">GPA: 3.72</p>
               </div>
             </div>
 

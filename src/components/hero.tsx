@@ -1,11 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 // import Scene from "./scene";
 
+const useTypewriter = (text: string, speed = 100, delay = 800) => {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayed(text.slice(0, i + 1));
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, speed);
+      return () => clearInterval(interval);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [text, speed, delay]);
+  return displayed;
+};
+
 const Hero: React.FC = () => {
+  const typedName = useTypewriter("Nikhil", 120, 1000);
+
   return (
     <section
       id="hero"
@@ -38,7 +57,7 @@ const Hero: React.FC = () => {
 
         {/* Replace your name here */}
         <h1 className="text-5xl md:text-7xl font-bold leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          hi, i&apos;m <span className="text-[#111827]">Nikhil</span>
+          hi, i&apos;m <span className="text-[#111827]">{typedName}</span><span className="animate-pulse">|</span>
         </h1>
 
         {/* Replace your role or title here */}

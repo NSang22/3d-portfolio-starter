@@ -72,18 +72,18 @@ const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen text-white px-8 md:px-16 py-24"
+      className="min-h-screen text-white px-4 md:px-16 py-24"
     >
       <ScrollReveal>
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
           <span className="text-[#111827]">projects</span>
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mx-auto">
           {projects.map((project) => (
             <div
               key={project.id}
-              className="bg-[#18181b] rounded-lg overflow-hidden shadow-lg p-6 flex flex-col justify-between min-h-[320px]"
+              className="bg-[#18181b] rounded-lg overflow-hidden shadow-lg p-4 md:p-6 flex flex-col justify-between min-h-[280px] md:min-h-[320px]"
             >
               <div>
                 <h3 className="text-base md:text-lg font-semibold mb-1">
