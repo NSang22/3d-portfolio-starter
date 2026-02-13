@@ -75,7 +75,7 @@ body {
 body {
   background-image: url("/images/bg_image.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: var(--foreground);
@@ -85,10 +85,27 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
+/* Mobile: use a fixed pseudo-element to avoid the iOS/Android
+   background-attachment:fixed bug that causes blur and zoom */
 @media (max-width: 768px) {
   body {
-    background-attachment: scroll;
+    background: none;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url("/images/bg_image.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 }
