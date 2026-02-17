@@ -20,7 +20,7 @@ const ExperienceSection: React.FC = () => {
       title: "Scrum Master and Team Lead, Project ALIGN",
       company: "Virtual Learning Lab, University of Florida",
       location: "Gainesville, FL",
-      period: "Jan. 2025 – May 2026",
+      period: "Jan. 2025 – May 2025",
       description: [
         "Led the development of curriculum alignment evaluations for AI-generated stories using Agile methodologies to coordinate team workflows and ensure progress.",
         "Implemented machine learning and statistical techniques (clustering, XGBoost, principal component analysis) to assess text alignment with the UF Literacy Institute Foundations curriculum.",
@@ -32,7 +32,7 @@ const ExperienceSection: React.FC = () => {
       title: "Research Intern",
       company: "Florida International University",
       location: "Miami, FL",
-      period: "May 2023 – Present",
+      period: "May 2023 – Aug. 2024",
       description: [
         "Conducting research on AI applications in bioinformatics, exploring LLMs, NLP, and robotics.",
         "Developing a bioinformatics-focused domain-specific LLM in collaboration with graduate researchers, contributing to model fine-tuning and evaluation.",
