@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Chakra_Petch, IBM_Plex_Sans } from "next/font/google";
+import { Syne, Inter } from "next/font/google";
 import "./globals.css";
 
-const displayFont = Chakra_Petch({
+const displayFont = Syne({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["600", "700", "800"],
 });
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600"],

@@ -24,7 +24,11 @@ const CLUSTER_LABELS: Record<ClusterKey, string> = {
 // Content stagger variants
 const FADE_UP = {
   hidden: { opacity: 0, y: 10 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.28, ease: 'easeOut' } },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.28, ease: "easeOut" as const },
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
