@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { type MouseEvent, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useRef, useState } from "react";
 import type { Project } from "@/data/projects";
 import {
   projectFileName,
@@ -33,6 +33,13 @@ export default function NsosFileTree({
   const tooltipTimeout = useRef<number | null>(null);
 
   const isOpen = (k: string) => openFolders.has(k);
+
+  useEffect(() => {
+    return () => {
+      if (tooltipTimeout.current) window.clearTimeout(tooltipTimeout.current);
+    };
+  }, []);
+
   const showTooltip = (text: string, y: number) => {
     if (tooltipTimeout.current) window.clearTimeout(tooltipTimeout.current);
     tooltipTimeout.current = window.setTimeout(() => {

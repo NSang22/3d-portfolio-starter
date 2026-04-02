@@ -410,7 +410,7 @@ export default function NsosTerminal({
         kind: "output",
         lines: [
           "Available commands:",
-          "help, pwd, ls [path], cd <path>, cat <file>, open <target>, tree [path], clear",
+          "help, pwd, ls [path], cd <path>, cat <file>, open <target>, tree [path], mkdir <dir>, touch <file>, clear",
           "Tips:",
           "- cd projects/biotech",
           "- open neurophenotype.py",
