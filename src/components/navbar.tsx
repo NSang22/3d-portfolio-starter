@@ -2,10 +2,16 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const brandHref =
+    pathname === "/classic" || pathname?.startsWith("/classic/")
+      ? "/classic"
+      : "/";
 
   const links = [
     { href: "#hero", label: "home" },
@@ -24,7 +30,10 @@ const Navbar: React.FC = () => {
       className="fixed top-0 left-0 w-full z-50 bg-[#041e2b] backdrop-blur-lg text-white border-b border-gray-800"
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <Link href="/" className="text-xl md:text-2xl font-bold text-white">
+        <Link
+          href={brandHref}
+          className="text-xl md:text-2xl font-bold text-white"
+        >
           Nikhil Sangamkar
         </Link>
 

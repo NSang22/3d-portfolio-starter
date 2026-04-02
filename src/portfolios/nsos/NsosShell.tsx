@@ -340,7 +340,7 @@ export default function NsosShell() {
             {(process.env.NODE_ENV === "development" ||
               process.env.NEXT_PUBLIC_ENABLE_DESIGN_LAB === "true") && (
               <div className="nsos-lab-link">
-                <Link href="/lab/signal">Open signal portfolio (lab)</Link>
+                <Link href="/classic">Classic single-page portfolio</Link>
               </div>
             )}
           </aside>
