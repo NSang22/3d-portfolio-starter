@@ -630,12 +630,11 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
     ...p.domains.map((d) => d),
   ].slice(0, 8);
   const isNeuro = p.id === "neurophenotype";
-  const isRnaSeq = p.id === "rna-seq";
 
   return (
     <div className="nsos-panel active">
       <motion.div
-        className={`nsos-project-detail ${isNeuro ? "nsos-project-detail-neuro" : ""} ${isRnaSeq ? "nsos-project-detail-rna" : ""}`}
+        className={`nsos-project-detail ${isNeuro ? "nsos-project-detail-neuro nsos-project-detail-rna" : ""}`}
         initial="hidden"
         whileInView="visible"
         viewport={NSOS_SCROLL_VIEWPORT}
@@ -643,7 +642,7 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
       >
         {isNeuro && <NeuroSignalPanel />}
         <div
-          className={`nsos-project-layout ${isRnaSeq ? "nsos-project-layout-split" : ""}`}
+          className={`nsos-project-layout ${isNeuro ? "nsos-project-layout-split" : ""}`}
         >
           <div className="nsos-project-main">
             <motion.div className="nsos-pd-header" variants={nsosRevealChild}>
@@ -691,7 +690,7 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
               </div>
             </motion.div>
           </div>
-          {isRnaSeq && (
+          {isNeuro && (
             <aside className="nsos-project-side">
               <RnaSeqVolcanoPlot />
             </aside>

@@ -1,12 +1,21 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { type MouseEvent, useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, type MouseEvent, useEffect, useRef, useState } from "react";
 import type { Project } from "@/data/projects";
 import {
   projectFileName,
   projectFolderKey,
 } from "@/portfolios/nsos/explorer";
+
+function folderHeaderKeyHandler(onToggle: () => void) {
+  return (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onToggle();
+    }
+  };
+}
 
 type Props = {
   projects: Project[];
@@ -76,9 +85,7 @@ export default function NsosFileTree({
           <div
             className="nsos-folder-header"
             onClick={() => toggleFolder("fp")}
-            onKeyDown={(e) =>
-              e.key === "Enter" && toggleFolder("fp")
-            }
+            onKeyDown={folderHeaderKeyHandler(() => toggleFolder("fp"))}
             role="button"
             tabIndex={0}
             {...hoverHandlers("Start here")}
@@ -106,9 +113,9 @@ export default function NsosFileTree({
                 onClick={() => toggleFolder("fp:projects")}
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) =>
-                  e.key === "Enter" && toggleFolder("fp:projects")
-                }
+                onKeyDown={folderHeaderKeyHandler(() =>
+                  toggleFolder("fp:projects"),
+                )}
                 {...hoverHandlers("7 projects across biotech and systems")}
               >
                 <span className="nsos-folder-chevron">▶</span>
@@ -123,6 +130,9 @@ export default function NsosFileTree({
                   <div
                     className="nsos-folder-header"
                     onClick={() => toggleFolder("fp:projects:biotech")}
+                    onKeyDown={folderHeaderKeyHandler(() =>
+                      toggleFolder("fp:projects:biotech"),
+                    )}
                     role="button"
                     tabIndex={0}
                     {...hoverHandlers("NeuroPhenotype, iGEM, RNA-seq")}
@@ -154,6 +164,9 @@ export default function NsosFileTree({
                   <div
                     className="nsos-folder-header"
                     onClick={() => toggleFolder("fp:projects:systems")}
+                    onKeyDown={folderHeaderKeyHandler(() =>
+                      toggleFolder("fp:projects:systems"),
+                    )}
                     role="button"
                     tabIndex={0}
                     {...hoverHandlers("PatchLab, Buddy Lock In, DataSmart, ResearchHub")}
@@ -224,6 +237,7 @@ export default function NsosFileTree({
               <div
                 className="nsos-folder-header"
                 onClick={() => toggleFolder("fp:config")}
+                onKeyDown={folderHeaderKeyHandler(() => toggleFolder("fp:config"))}
                 role="button"
                 tabIndex={0}
                 {...hoverHandlers("Tech stack and skills")}
@@ -260,6 +274,7 @@ export default function NsosFileTree({
               <div
                 className="nsos-folder-header"
                 onClick={() => toggleFolder("fp:links")}
+                onKeyDown={folderHeaderKeyHandler(() => toggleFolder("fp:links"))}
                 role="button"
                 tabIndex={0}
                 {...hoverHandlers("GitHub, LinkedIn, Email")}
