@@ -92,17 +92,20 @@ export default function NsosShell() {
   }, []);
 
   useEffect(() => {
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
     BOOT_LINES.forEach((line, i) => {
-      setTimeout(() => {
+      const id = setTimeout(() => {
         if (line.t) {
           setBootLines((prev) => [...prev, line.t]);
         }
         setBootProgress(((i + 1) / BOOT_LINES.length) * 100);
       }, line.d);
+      timeouts.push(id);
     });
     const done = setTimeout(() => setBootHidden(true), 2400);
+    timeouts.push(done);
     return () => {
-      clearTimeout(done);
+      timeouts.forEach(clearTimeout);
     };
   }, []);
 
@@ -156,9 +159,9 @@ export default function NsosShell() {
 
   const statusFile = tabTitle(activePanel, projects);
 
-  const openExternal = (url: string) => {
+  const openExternal = useCallback((url: string) => {
     window.open(url, "_blank", "noopener,noreferrer");
-  };
+  }, []);
 
   const commandEntries = useMemo<CommandPaletteEntry[]>(() => {
     const projectDescriptions: Record<string, string> = {
@@ -269,7 +272,7 @@ export default function NsosShell() {
         onSelect: () => openExternal("mailto:nsangamkar1222@gmail.com"),
       },
     ];
-  }, [openPanel]);
+  }, [openPanel, openExternal]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -350,18 +353,18 @@ export default function NsosShell() {
               {bc.map((seg, i) => (
                 <span key={`${seg}-${i}`}>
                   {i > 0 && <span className="nsos-bc-sep">/</span>}
-                  {i < bc.length - 1 ? (
+                  {i === bc.length - 1 ? (
+                    <span className="nsos-bc-active">{seg}</span>
+                  ) : i === 0 ? (
                     <button
                       type="button"
                       className="nsos-bc-clickable"
-                      onClick={() => {
-                        if (i === 0) openPanel("home");
-                      }}
+                      onClick={() => openPanel("home")}
                     >
                       {seg}
                     </button>
                   ) : (
-                    <span className="nsos-bc-active">{seg}</span>
+                    <span>{seg}</span>
                   )}
                 </span>
               ))}
@@ -369,31 +372,44 @@ export default function NsosShell() {
 
             <div className="nsos-window-tabs">
               {tabs.map((tid) => (
-                <button
+                <div
                   key={tid}
-                  type="button"
                   className={`nsos-window-tab ${activePanel === tid ? "active" : ""}`}
-                  onClick={() => switchTab(tid)}
                 >
-                  <span
-                    className="nsos-tab-dot"
+                  <button
+                    type="button"
+                    onClick={() => switchTab(tid)}
+                    aria-label={`Open ${tabTitle(tid, projects)} tab`}
                     style={{
-                      background: tabDotForPanel(tid),
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "inherit",
+                      background: "transparent",
+                      border: 0,
+                      padding: 0,
+                      margin: 0,
+                      color: "inherit",
+                      font: "inherit",
+                      cursor: "pointer",
                     }}
-                  />
-                  {tabTitle(tid, projects)}
+                  >
+                    <span
+                      className="nsos-tab-dot"
+                      style={{
+                        background: tabDotForPanel(tid),
+                      }}
+                    />
+                    {tabTitle(tid, projects)}
+                  </button>
                   <button
                     type="button"
                     className="nsos-tab-close"
                     aria-label="Close tab"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      closeTab(tid);
-                    }}
+                    onClick={() => closeTab(tid)}
                   >
                     ×
                   </button>
-                </button>
+                </div>
               ))}
               <button
                 type="button"

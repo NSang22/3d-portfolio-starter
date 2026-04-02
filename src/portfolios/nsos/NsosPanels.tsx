@@ -2,7 +2,7 @@
 
 import * as d3 from "d3";
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import StaticWaveformSVG from "@/components/StaticWaveformSVG";
 import type { Domain } from "@/data/domainColors";
 import type { Project } from "@/data/projects";
@@ -49,7 +49,7 @@ function ScrollIn({
   delay = 0,
   y = 16,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   delay?: number;
   y?: number;

@@ -142,11 +142,12 @@ export default function CommandPalette({ open, onClose, entries }: Props) {
                 <div className="nsos-cp-empty">No matches. Try another query.</div>
               )}
             </div>
-            <div className="nsos-cp-hint">↑↓ to navigate · Enter to open · Esc to close</div>
+            <div className="nsos-cp-hint">
+              Up/Down to navigate - Enter to open - Esc to close
+            </div>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
-
