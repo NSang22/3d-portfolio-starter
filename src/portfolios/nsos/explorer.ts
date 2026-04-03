@@ -19,7 +19,8 @@ export const TAB_DOT: Record<string, string> = {
 export function tabDotForPanel(panelId: string): string {
   if (panelId.startsWith("project:")) {
     const id = panelId.slice("project:".length);
-    if (id.includes("neuro") || id.includes("bmo")) return "var(--nsos-pink)";
+    if (id.includes("neuro") || id.includes("bmo") || id.includes("rna"))
+      return "var(--nsos-pink)";
     if (id.includes("buddy") || id.includes("patch") || id.includes("florida"))
       return "var(--nsos-info)";
     return "var(--nsos-accent)";
@@ -29,12 +30,20 @@ export function tabDotForPanel(panelId: string): string {
 
 export function projectFileName(p: Project): string {
   const base = p.id.replace(/-/g, "_");
-  const ext = p.domains.includes("biomedical") ? ".py" : ".ts";
+  const ext =
+    p.domains.includes("biomedical") || p.domains.includes("bioinformatics")
+      ? ".py"
+      : ".ts";
   return `${base}${ext}`;
 }
 
 export function projectFolderKey(p: Project): "biotech" | "systems" {
-  if (p.domains.includes("biomedical")) return "biotech";
+  if (
+    p.domains.includes("biomedical") ||
+    p.domains.includes("bioinformatics")
+  ) {
+    return "biotech";
+  }
   return "systems";
 }
 

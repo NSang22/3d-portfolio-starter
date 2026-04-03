@@ -3,7 +3,7 @@ import { DOMAIN_COLORS } from "@/data/domainColors";
 const streams = [
   {
     key: "biomedical",
-    label: "BIOMEDICAL",
+    label: "",
     color: DOMAIN_COLORS.biomedical,
     y: 25,
     points:
@@ -11,7 +11,7 @@ const streams = [
   },
   {
     key: "civic",
-    label: "CIVIC AI",
+    label: "",
     color: DOMAIN_COLORS.civic,
     y: 42,
     points:
@@ -19,7 +19,7 @@ const streams = [
   },
   {
     key: "data",
-    label: "DATA INFRA",
+    label: "",
     color: DOMAIN_COLORS.data,
     y: 58,
     points:
@@ -27,11 +27,19 @@ const streams = [
   },
   {
     key: "ml",
-    label: "APPLIED ML",
+    label: "",
     color: DOMAIN_COLORS.ml,
     y: 75,
     points:
       "0,75 70,75 90,65 115,85 135,70 160,78 200,75 300,73 400,75",
+  },
+  {
+    key: "bioinformatics",
+    label: "",
+    color: DOMAIN_COLORS.bioinformatics,
+    y: 92,
+    points:
+      "0,92 55,92 78,88 100,95 125,90 150,93 200,92 300,91 400,92",
   },
 ];
 
