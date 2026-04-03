@@ -30,8 +30,25 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "buddy",
+    id: "rna-seq",
     number: "002",
+    title: "Dengue/Zika RNA-seq Analysis",
+    domains: ["bioinformatics", "data"],
+    summary:
+      "Differential gene expression analysis of immune response across Dengue and Zika infection using bulk RNA-seq.",
+    detail:
+      "End-to-end RNA-seq pipeline studying immune gene expression divergence between Dengue and Zika virus infection. Identified 48 differentially expressed genes, ran GSEA pathway enrichment, and built classifiers to distinguish infection type from transcriptomic signatures.",
+    metrics: [
+      { value: "48", label: "differentially expressed genes identified" },
+      { value: "0.97", label: "infection-type classifier performance" },
+      { value: "GSEA", label: "pathway enrichment analysis" },
+      { value: "bulk RNA-seq", label: "sequencing modality" },
+    ],
+    stack: ["R", "DESeq2", "GSEA", "RNA-seq", "bioinformatics", "ggplot2"],
+  },
+  {
+    id: "buddy",
+    number: "003",
     title: "Buddy: Lock In",
     domains: ["ml", "data"],
     summary:
@@ -46,7 +63,7 @@ export const projects: Project[] = [
   },
   {
     id: "patchlab",
-    number: "003",
+    number: "004",
     title: "PatchLab",
     domains: ["ml", "data"],
     summary:
@@ -75,7 +92,7 @@ export const projects: Project[] = [
   },
   {
     id: "datasmart",
-    number: "005",
+    number: "006",
     title: "DataSmart",
     domains: ["data", "civic"],
     summary:
@@ -89,7 +106,7 @@ export const projects: Project[] = [
   },
   {
     id: "florida-resource-map",
-    number: "006",
+    number: "007",
     title: "Florida Resource Map",
     domains: ["civic", "data"],
     summary:

@@ -414,6 +414,7 @@ export default function NsosTerminal({
           "Tips:",
           "- cd projects/biotech",
           "- open neurophenotype.py",
+          "- open rna_seq.py",
           "- open github",
           "- cat mission.txt",
         ],

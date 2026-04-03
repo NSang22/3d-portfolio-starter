@@ -165,8 +165,9 @@ export default function NsosShell() {
 
   const commandEntries = useMemo<CommandPaletteEntry[]>(() => {
     const projectDescriptions: Record<string, string> = {
-      neurophenotype:
-        "EEG biosignal pipeline, rare disease screening; RNA-seq volcano viz in project view",
+      neurophenotype: "EEG biosignal pipeline, rare disease screening",
+      "rna-seq":
+        "Dengue/Zika bulk RNA-seq — 48 DEGs, GSEA, classifier AUC 0.97",
       igem: "Computational protein design, UF iGEM",
       patchlab: "Patient data patching and backend tooling",
       "buddy-lock-in": "Focus accountability app and systems workflows",

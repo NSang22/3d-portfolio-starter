@@ -904,6 +904,10 @@
   background: #e070a033;
   color: var(--nsos-pink);
 }
+.nsos-ptag-bioinf {
+  background: #22c55e33;
+  color: #4ade80;
+}
 .nsos-ptag-ml {
   background: #a07be033;
   color: var(--nsos-purple);
@@ -1117,6 +1121,117 @@
   margin-bottom: 14px;
 }
 
+.nsos-buddy-pikachu {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 24px;
+  min-height: 280px;
+}
+
+.nsos-buddy-pikachu-copy {
+  margin-bottom: 14px;
+}
+
+.nsos-buddy-pikachu-label {
+  display: block;
+  font-family: var(--font-nsos-sans), sans-serif;
+  font-size: 12px;
+  color: var(--nsos-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.nsos-buddy-pikachu-pre {
+  font-family: var(--font-nsos-mono), ui-monospace, monospace;
+  font-size: clamp(7px, 0.85vw, 9px);
+  line-height: 1.35;
+  color: #fcd34d;
+  text-shadow:
+    0 0 24px rgba(251, 191, 36, 0.25),
+    0 0 2px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  user-select: none;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.nsos-buddy-pikachu-line {
+  white-space: pre;
+  overflow: hidden;
+}
+
+.nsos-patchlab-art {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 24px;
+  min-height: 280px;
+}
+
+.nsos-patchlab-art-copy {
+  margin-bottom: 14px;
+}
+
+.nsos-patchlab-art-label {
+  display: block;
+  font-family: var(--font-nsos-sans), sans-serif;
+  font-size: 12px;
+  color: var(--nsos-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.nsos-patchlab-art-pre {
+  font-family: var(--font-nsos-mono), ui-monospace, monospace;
+  font-size: clamp(6px, 0.75vw, 8px);
+  line-height: 1.32;
+  color: #a5b4fc;
+  text-shadow:
+    0 0 22px rgba(129, 140, 248, 0.35),
+    0 0 2px rgba(0, 0, 0, 0.55);
+  margin: 0;
+  user-select: none;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.nsos-patchlab-art-line {
+  white-space: pre;
+  overflow: hidden;
+}
+
+.nsos-bmocare-art {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 24px;
+  min-height: 280px;
+}
+
+.nsos-bmocare-art-copy {
+  margin-bottom: 14px;
+}
+
+.nsos-bmocare-art-label {
+  display: block;
+  font-family: var(--font-nsos-sans), sans-serif;
+  font-size: 12px;
+  color: var(--nsos-text-dim);
+  letter-spacing: 0.02em;
+}
+
+.nsos-bmocare-art-pre {
+  font-family: var(--font-nsos-mono), ui-monospace, monospace;
+  font-size: clamp(6px, 0.72vw, 8px);
+  line-height: 1.32;
+  color: #5eead4;
+  text-shadow:
+    0 0 22px rgba(45, 212, 191, 0.32),
+    0 0 2px rgba(0, 0, 0, 0.55);
+  margin: 0;
+  user-select: none;
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.nsos-bmocare-art-line {
+  white-space: pre;
+  overflow: hidden;
+}
+
 .nsos-volcano-inline {
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   padding-left: 24px;
@@ -1154,6 +1269,30 @@
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-left: 0;
     padding-top: 20px;
+  }
+
+  .nsos-buddy-pikachu {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 0;
+    padding-top: 20px;
+    min-height: 0;
+  }
+
+  .nsos-patchlab-art {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 0;
+    padding-top: 20px;
+    min-height: 0;
+  }
+
+  .nsos-bmocare-art {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 0;
+    padding-top: 20px;
+    min-height: 0;
   }
 }
 

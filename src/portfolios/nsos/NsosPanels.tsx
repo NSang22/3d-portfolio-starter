@@ -17,6 +17,8 @@ import {
   nsosSkills,
   nsosStats,
 } from "@/portfolios/nsos/content";
+import { BMO_CARE_BLOCK_ART } from "@/portfolios/nsos/bmoCareBlockArt";
+import { PATCHLAB_BLOCK_ART } from "@/portfolios/nsos/patchlabBlockArt";
 
 const NSOS_SCROLL_VIEWPORT = {
   once: true,
@@ -69,6 +71,7 @@ function ScrollIn({
 
 function domainPtagClass(d: Domain): string {
   if (d === "biomedical") return "nsos-ptag-bio";
+  if (d === "bioinformatics") return "nsos-ptag-bioinf";
   if (d === "ml") return "nsos-ptag-ml";
   if (d === "data" || d === "civic") return "nsos-ptag-sys";
   return "nsos-ptag-def";
@@ -76,6 +79,7 @@ function domainPtagClass(d: Domain): string {
 
 function domainLabel(d: Domain): string {
   if (d === "biomedical") return "biotech";
+  if (d === "bioinformatics") return "bioinformatics";
   if (d === "ml") return "ai/ml";
   if (d === "data") return "data";
   return "civic";
@@ -295,8 +299,8 @@ function RnaSeqVolcanoPlot() {
     <motion.div className="nsos-volcano-inline" variants={nsosRevealChild}>
       <div className="nsos-volcano-copy">
         <div>
-          <strong>Animated volcano plot</strong> in D3, showing differential-expression
-          signal emerging progressively across the cohort.
+          {/* <strong>Animated volcano plot</strong> in D3, showing differential-expression
+          signal emerging progressively across the cohort. */}
         </div>
         <div className="nsos-volcano-legend">
           <span>48 DEGs</span>
@@ -309,6 +313,154 @@ function RnaSeqVolcanoPlot() {
         className="nsos-volcano-svg"
         aria-label="RNA-seq volcano plot"
       />
+    </motion.div>
+  );
+}
+
+/** Unicode block-art Pikachu (Buddy / Lock In companion). */
+const BUDDY_PIKACHU_ASCII = `
+⠸⣷⣦⠤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⠀⠀⠀
+⠀⠙⣿⡄⠈⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠔⠊⠉⣿⡿⠁⠀⠀⠀
+⠀⠀⠈⠣⡀⠀⠀⠑⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠊⠁⠀⠀⣰⠟⠀⠀⠀⣀⣀
+⠀⠀⠀⠀⠈⠢⣄⠀⡈⠒⠊⠉⠁⠀⠈⠉⠑⠚⠀⠀⣀⠔⢊⣠⠤⠒⠊⠉⠀⡜
+⠀⠀⠀⠀⠀⠀⠀⡽⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠩⡔⠊⠁⠀⠀⠀⠀⠀⠀⠇
+⠀⠀⠀⠀⠀⠀⠀⡇⢠⡤⢄⠀⠀⠀⠀⠀⡠⢤⣄⠀⡇⠀⠀⠀⠀⠀⠀⠀⢰⠀
+⠀⠀⠀⠀⠀⠀⢀⠇⠹⠿⠟⠀⠀⠤⠀⠀⠻⠿⠟⠀⣇⠀⠀⡀⠠⠄⠒⠊⠁⠀
+⠀⠀⠀⠀⠀⠀⢸⣿⣿⡆⠀⠰⠤⠖⠦⠴⠀⢀⣶⣿⣿⠀⠙⢄⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢻⣿⠃⠀⠀⠀⠀⠀⠀⠀⠈⠿⡿⠛⢄⠀⠀⠱⣄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢸⠈⠓⠦⠀⣀⣀⣀⠀⡠⠴⠊⠹⡞⣁⠤⠒⠉⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣠⠃⠀⠀⠀⠀⡌⠉⠉⡤⠀⠀⠀⠀⢻⠿⠆⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠰⠁⡀⠀⠀⠀⠀⢸⠀⢰⠃⠀⠀⠀⢠⠀⢣⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢶⣗⠧⡀⢳⠀⠀⠀⠀⢸⣀⣸⠀⠀⠀⢀⡜⠀⣸⢤⣶⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠈⠻⣿⣦⣈⣧⡀⠀⠀⢸⣿⣿⠀⠀⢀⣼⡀⣨⣿⡿⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⠻⠿⠿⠓⠄⠤⠘⠉⠙⠤⢀⠾⠿⣿⠟⠋
+`.trim();
+
+function BuddyPikachuAscii() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.35 });
+  const lines = BUDDY_PIKACHU_ASCII.split("\n");
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="nsos-buddy-pikachu"
+      variants={nsosRevealChild}
+      role="img"
+      aria-label="Unicode Pikachu block art for the Buddy Lock In project"
+    >
+      <div className="nsos-buddy-pikachu-copy">
+        <span className="nsos-buddy-pikachu-label" aria-hidden>
+          Buddy: Lock In — companion
+        </span>
+      </div>
+      <div className="nsos-buddy-pikachu-pre" aria-hidden>
+        {lines.map((line, i) => (
+          <motion.div
+            key={i}
+            className="nsos-buddy-pikachu-line"
+            initial={{ opacity: 0, filter: "blur(6px)" }}
+            animate={
+              inView
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(6px)" }
+            }
+            transition={{
+              delay: i * 0.055,
+              duration: 0.5,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line || "\u00a0"}
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function PatchlabBlockArt() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.2 });
+  const lines = PATCHLAB_BLOCK_ART.split("\n");
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="nsos-patchlab-art"
+      variants={nsosRevealChild}
+      role="img"
+      aria-label="Unicode block art for the PatchLab project"
+    >
+      <div className="nsos-patchlab-art-copy">
+        <span className="nsos-patchlab-art-label" aria-hidden>
+          PatchLab — playtesting
+        </span>
+      </div>
+      <div className="nsos-patchlab-art-pre" aria-hidden>
+        {lines.map((line, i) => (
+          <motion.div
+            key={i}
+            className="nsos-patchlab-art-line"
+            initial={{ opacity: 0, filter: "blur(5px)" }}
+            animate={
+              inView
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(5px)" }
+            }
+            transition={{
+              delay: i * 0.028,
+              duration: 0.42,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line || "\u00a0"}
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function BmoCareBlockArt() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.2 });
+  const lines = BMO_CARE_BLOCK_ART.split("\n");
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="nsos-bmocare-art"
+      variants={nsosRevealChild}
+      role="img"
+      aria-label="Unicode block art for the BMO Care project"
+    >
+      <div className="nsos-bmocare-art-copy">
+        <span className="nsos-bmocare-art-label" aria-hidden>
+          BMO Care — bedside companion
+        </span>
+      </div>
+      <div className="nsos-bmocare-art-pre" aria-hidden>
+        {lines.map((line, i) => (
+          <motion.div
+            key={i}
+            className="nsos-bmocare-art-line"
+            initial={{ opacity: 0, filter: "blur(5px)" }}
+            animate={
+              inView
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(5px)" }
+            }
+            transition={{
+              delay: i * 0.028,
+              duration: 0.42,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line || "\u00a0"}
+          </motion.div>
+        ))}
+      </div>
     </motion.div>
   );
 }
@@ -630,11 +782,16 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
     ...p.domains.map((d) => d),
   ].slice(0, 8);
   const isNeuro = p.id === "neurophenotype";
+  const isRnaSeq = p.id === "rna-seq";
+  const isBuddy = p.id === "buddy";
+  const isPatchlab = p.id === "patchlab";
+  const isBmoCare = p.id === "bmo-care";
+  const showProjectAside = isRnaSeq || isBuddy || isPatchlab || isBmoCare;
 
   return (
     <div className="nsos-panel active">
       <motion.div
-        className={`nsos-project-detail ${isNeuro ? "nsos-project-detail-neuro nsos-project-detail-rna" : ""}`}
+        className={`nsos-project-detail ${isNeuro ? "nsos-project-detail-neuro" : ""} ${isRnaSeq ? "nsos-project-detail-rna" : ""} ${isBuddy ? "nsos-project-detail-buddy" : ""} ${isPatchlab ? "nsos-project-detail-patchlab" : ""} ${isBmoCare ? "nsos-project-detail-bmocare" : ""}`}
         initial="hidden"
         whileInView="visible"
         viewport={NSOS_SCROLL_VIEWPORT}
@@ -642,7 +799,7 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
       >
         {isNeuro && <NeuroSignalPanel />}
         <div
-          className={`nsos-project-layout ${isNeuro ? "nsos-project-layout-split" : ""}`}
+          className={`nsos-project-layout ${showProjectAside ? "nsos-project-layout-split" : ""}`}
         >
           <div className="nsos-project-main">
             <motion.div className="nsos-pd-header" variants={nsosRevealChild}>
@@ -690,9 +847,24 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
               </div>
             </motion.div>
           </div>
-          {isNeuro && (
+          {isRnaSeq && (
             <aside className="nsos-project-side">
               <RnaSeqVolcanoPlot />
+            </aside>
+          )}
+          {isBuddy && (
+            <aside className="nsos-project-side">
+              <BuddyPikachuAscii />
+            </aside>
+          )}
+          {isPatchlab && (
+            <aside className="nsos-project-side">
+              <PatchlabBlockArt />
+            </aside>
+          )}
+          {isBmoCare && (
+            <aside className="nsos-project-side">
+              <BmoCareBlockArt />
             </aside>
           )}
         </div>
