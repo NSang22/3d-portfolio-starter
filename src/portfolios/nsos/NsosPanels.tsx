@@ -20,6 +20,43 @@ import {
 import { BMO_CARE_BLOCK_ART } from "@/portfolios/nsos/bmoCareBlockArt";
 import { PATCHLAB_BLOCK_ART } from "@/portfolios/nsos/patchlabBlockArt";
 
+/** Light / medium / dark shade blocks in Mario-style art → red fills; rest stays base color. */
+function patchlabArtLineNodes(line: string, lineIndex: number): ReactNode {
+  const LIGHT = "\u2591";
+  const MEDIUM = "\u2592";
+  const DARK = "\u2593";
+  const parts: ReactNode[] = [];
+  let buf = "";
+  let part = 0;
+  const flush = () => {
+    if (buf.length > 0) {
+      parts.push(buf);
+      buf = "";
+    }
+  };
+  for (let j = 0; j < line.length; j++) {
+    const ch = line[j];
+    if (ch === LIGHT || ch === MEDIUM || ch === DARK) {
+      flush();
+      const cls =
+        ch === LIGHT
+          ? "nsos-patchlab-art-fill-light"
+          : ch === MEDIUM
+            ? "nsos-patchlab-art-fill-mid"
+            : "nsos-patchlab-art-fill-dark";
+      parts.push(
+        <span key={`${lineIndex}-${part++}`} className={cls}>
+          {ch}
+        </span>,
+      );
+    } else {
+      buf += ch;
+    }
+  }
+  flush();
+  return parts.length > 0 ? parts : "\u00a0";
+}
+
 const NSOS_SCROLL_VIEWPORT = {
   once: true,
   amount: 0.12,
@@ -41,6 +78,20 @@ const nsosRevealStagger = {
   hidden: {},
   visible: {
     transition: { staggerChildren: 0.07, delayChildren: 0.06 },
+  },
+} as const;
+
+/** Terminal: same reveal as hero blocks but slightly stronger motion (part of home stagger). */
+const nsosRevealTerminal = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.32,
+      duration: 0.62,
+      ease: [0.22, 1, 0.36, 1],
+    },
   },
 } as const;
 
@@ -351,7 +402,6 @@ function BuddyPikachuAscii() {
     >
       <div className="nsos-buddy-pikachu-copy">
         <span className="nsos-buddy-pikachu-label" aria-hidden>
-          Buddy: Lock In — companion
         </span>
       </div>
       <div className="nsos-buddy-pikachu-pre" aria-hidden>
@@ -393,9 +443,7 @@ function PatchlabBlockArt() {
       aria-label="Unicode block art for the PatchLab project"
     >
       <div className="nsos-patchlab-art-copy">
-        <span className="nsos-patchlab-art-label" aria-hidden>
-          PatchLab — playtesting
-        </span>
+        <span className="nsos-patchlab-art-label" aria-hidden>        </span>
       </div>
       <div className="nsos-patchlab-art-pre" aria-hidden>
         {lines.map((line, i) => (
@@ -414,7 +462,7 @@ function PatchlabBlockArt() {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            {line || "\u00a0"}
+            {line ? patchlabArtLineNodes(line, i) : "\u00a0"}
           </motion.div>
         ))}
       </div>
@@ -465,6 +513,111 @@ function BmoCareBlockArt() {
   );
 }
 
+/** Home panel (virtual `home.tsx`): hero, full-width terminal, below-fold. Reveal runs every mount. */
+function NsosHomePanel({
+  activePanel,
+  openPanel,
+  openExternal,
+}: {
+  activePanel: string;
+  openPanel: (panelId: string) => void;
+  openExternal: (url: string) => void;
+}) {
+  const [reveal, setReveal] = useState(false);
+
+  useEffect(() => {
+    setReveal(false);
+    const t = window.setTimeout(() => setReveal(true), 0);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="nsos-panel active">
+      <div className="nsos-home-hero">
+        <motion.div
+          className="nsos-home-top"
+          initial="hidden"
+          animate={reveal ? "visible" : "hidden"}
+          variants={nsosRevealStagger}
+        >
+          <motion.div variants={nsosRevealChild}>
+            <div className="nsos-home-ascii">{NSOS_HOME_ASCII}</div>
+          </motion.div>
+          <motion.div variants={nsosRevealChild}>
+            <h1 className="nsos-home-name">
+              Nikhil <span className="nsos-highlight">Sangamkar</span>
+            </h1>
+          </motion.div>
+          <motion.div variants={nsosRevealChild}>
+            <p className="nsos-home-tagline">
+              Building the engineering layer between AI and real-world systems.
+            </p>
+            <p className="nsos-home-tagline">
+              CS + Math @ University of Florida.
+            </p>
+          </motion.div>
+          <motion.div className="nsos-home-stats" variants={nsosRevealStagger}>
+            {(nsosStats as ReadonlyArray<{ value: string; label: string }>).map((s) => (
+              <CountUpStat key={s.label} value={s.value} label={s.label} />
+            ))}
+          </motion.div>
+          <motion.div className="nsos-home-terminal-wrap" variants={nsosRevealTerminal}>
+            <NsosTerminal
+              projects={projects}
+              activePanel={activePanel}
+              openPanel={openPanel}
+              openExternal={openExternal}
+              embedded
+            />
+          </motion.div>
+          <motion.section
+            className="nsos-home-below-fold"
+            variants={nsosRevealChild}
+            aria-label="More on this portfolio"
+          >
+            <h2 className="nsos-home-below-title">
+              <span className="nsos-hash">#</span> keep exploring
+            </h2>
+            <p className="nsos-home-below-lede">
+              Open a panel from the sidebar or jump here!
+            </p>
+            <div className="nsos-home-below-actions">
+              <button
+                type="button"
+                className="nsos-home-below-btn"
+                onClick={() => openPanel("projects")}
+              >
+                Projects
+              </button>
+              <button
+                type="button"
+                className="nsos-home-below-btn"
+                onClick={() => openPanel("about")}
+              >
+                About
+              </button>
+              <button
+                type="button"
+                className="nsos-home-below-btn"
+                onClick={() => openPanel("experience")}
+              >
+                Experience
+              </button>
+              <button
+                type="button"
+                className="nsos-home-below-btn"
+                onClick={() => openPanel("contact")}
+              >
+                Contact
+              </button>
+            </div>
+          </motion.section>
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 export function NsosPanelBody({
   panelId,
   openProject,
@@ -480,53 +633,11 @@ export function NsosPanelBody({
 }) {
   if (panelId === "home") {
     return (
-      <div className="nsos-panel active">
-        <div className="nsos-home-hero">
-          <motion.div
-            className="nsos-home-top"
-            initial="hidden"
-            animate="visible"
-            variants={nsosRevealStagger}
-          >
-            <motion.div variants={nsosRevealChild}>
-              <div className="nsos-home-ascii">{NSOS_HOME_ASCII}</div>
-            </motion.div>
-            <motion.div variants={nsosRevealChild}>
-              <h1 className="nsos-home-name">
-                Nikhil <span className="nsos-highlight">Sangamkar</span>
-              </h1>
-            </motion.div>
-            <motion.div variants={nsosRevealChild}>
-              <p className="nsos-home-tagline">
-                Building the engineering layer between AI and real-world systems.
-              </p>
-              <p className="nsos-home-tagline">
-                CS + Math @ University of Florida.
-              </p>
-            </motion.div>
-            <motion.div className="nsos-home-stats" variants={nsosRevealStagger}>
-              {(nsosStats as ReadonlyArray<{ value: string; label: string }>).map((s) => (
-                <CountUpStat key={s.label} value={s.value} label={s.label} />
-              ))}
-            </motion.div>
-          </motion.div>
-          <motion.div
-            className="nsos-home-terminal-wrap"
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.85, margin: "0px 0px -24px 0px" }}
-            transition={{ duration: 0.55, ease: NSOS_SCROLL_EASE }}
-          >
-            <NsosTerminal
-              projects={projects}
-              activePanel={activePanel}
-              openPanel={openPanel}
-              openExternal={openExternal}
-              embedded
-            />
-          </motion.div>
-        </div>
-      </div>
+      <NsosHomePanel
+        activePanel={activePanel}
+        openPanel={openPanel}
+        openExternal={openExternal}
+      />
     );
   }
 

@@ -2,7 +2,14 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import CommandPalette, {
   type CommandPaletteEntry,
 } from "@/components/CommandPalette";
@@ -62,10 +69,37 @@ const PANEL_TRANSITION = {
   },
 } as const;
 
+const NSOS_BOOT_SEEN_KEY = "nsos:boot-seen";
+
+/** Max open tabs in the strip; oldest (after home) is evicted when opening a new panel. */
+const MAX_TAB_STRIP_TABS = 7;
+
 export default function NsosShell() {
+  const hasSeenBoot = () => {
+    try {
+      return window.localStorage.getItem(NSOS_BOOT_SEEN_KEY) === "1";
+    } catch {
+      return false;
+    }
+  };
+  const markBootSeen = () => {
+    try {
+      window.localStorage.setItem(NSOS_BOOT_SEEN_KEY, "1");
+    } catch {
+      // ignore storage errors (private mode / blocked storage)
+    }
+  };
+
+  /** Same on server + first client paint — avoids hydration mismatch (never read localStorage here). */
   const [bootHidden, setBootHidden] = useState(false);
   const [bootLines, setBootLines] = useState<string[]>([]);
   const [bootProgress, setBootProgress] = useState(0);
+
+  useLayoutEffect(() => {
+    if (hasSeenBoot()) {
+      setBootHidden(true);
+    }
+  }, []);
 
   const [openFolders, setOpenFolders] = useState(() => new Set(DEFAULT_OPEN));
   const [activePanel, setActivePanel] = useState("home");
@@ -92,6 +126,7 @@ export default function NsosShell() {
   }, []);
 
   useEffect(() => {
+    if (bootHidden) return;
     const timeouts: ReturnType<typeof setTimeout>[] = [];
     BOOT_LINES.forEach((line, i) => {
       const id = setTimeout(() => {
@@ -102,15 +137,19 @@ export default function NsosShell() {
       }, line.d);
       timeouts.push(id);
     });
-    const done = setTimeout(() => setBootHidden(true), 2400);
+    const done = setTimeout(() => {
+      setBootHidden(true);
+      markBootSeen();
+    }, 2400);
     timeouts.push(done);
     return () => {
       timeouts.forEach(clearTimeout);
     };
-  }, []);
+  }, [bootHidden]);
 
   const dismissBoot = useCallback(() => {
     setBootHidden(true);
+    markBootSeen();
   }, []);
 
   const toggleFolder = useCallback((key: string) => {
@@ -128,7 +167,16 @@ export default function NsosShell() {
 
   const openPanel = useCallback((panelId: string) => {
     setActivePanel(panelId);
-    setTabs((prev) => (prev.includes(panelId) ? prev : [...prev, panelId]));
+    setTabs((prev) => {
+      if (prev.includes(panelId)) return prev;
+      const next = [...prev, panelId];
+      while (next.length > MAX_TAB_STRIP_TABS) {
+        const evictIdx = next.findIndex((t) => t !== "home");
+        if (evictIdx === -1) break;
+        next.splice(evictIdx, 1);
+      }
+      return next;
+    });
   }, []);
 
   const openProject = useCallback((id: string) => {
@@ -136,6 +184,7 @@ export default function NsosShell() {
   }, [openPanel]);
 
   const closeTab = useCallback((panelId: string) => {
+    if (panelId === "home") return;
     setTabs((prev) => {
       if (prev.length <= 1) return prev;
       return prev.filter((p) => p !== panelId);
@@ -288,36 +337,38 @@ export default function NsosShell() {
 
   return (
     <>
-      <div
-        className={`nsos-boot ${bootHidden ? "hidden" : ""}`}
-        onClick={dismissBoot}
-        onKeyDown={(e) => e.key === "Enter" && dismissBoot()}
-        role="button"
-        tabIndex={0}
-        aria-label="Dismiss boot screen"
-      >
-        <div className="nsos-boot-logo">
-          nsOS
-          <span>research operating system v2.7.0</span>
-        </div>
-        <div className="nsos-boot-log">
-          {bootLines.map((line, i) => (
+      {!bootHidden && (
+        <div
+          className="nsos-boot"
+          onClick={dismissBoot}
+          onKeyDown={(e) => e.key === "Enter" && dismissBoot()}
+          role="button"
+          tabIndex={0}
+          aria-label="Dismiss boot screen"
+        >
+          <div className="nsos-boot-logo">
+            nsOS
+            <span>research operating system v2.7.0</span>
+          </div>
+          <div className="nsos-boot-log">
+            {bootLines.map((line, i) => (
+              <div
+                key={`boot-${i}-${line.slice(0, 12)}`}
+                className="nsos-boot-line"
+                style={line.startsWith(">") ? { color: "#00d4aa" } : undefined}
+              >
+                {line}
+              </div>
+            ))}
+          </div>
+          <div className="nsos-boot-progress">
             <div
-              key={`boot-${i}-${line.slice(0, 12)}`}
-              className="nsos-boot-line"
-              style={line.startsWith(">") ? { color: "#00d4aa" } : undefined}
-            >
-              {line}
-            </div>
-          ))}
+              className="nsos-boot-progress-bar"
+              style={{ width: `${bootProgress}%` }}
+            />
+          </div>
         </div>
-        <div className="nsos-boot-progress">
-          <div
-            className="nsos-boot-progress-bar"
-            style={{ width: `${bootProgress}%` }}
-          />
-        </div>
-      </div>
+      )}
 
       <div className="nsos-desktop">
         <div className="nsos-taskbar">
@@ -372,46 +423,50 @@ export default function NsosShell() {
             </div>
 
             <div className="nsos-window-tabs">
-              {tabs.map((tid) => (
-                <div
-                  key={tid}
-                  className={`nsos-window-tab ${activePanel === tid ? "active" : ""}`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => switchTab(tid)}
-                    aria-label={`Open ${tabTitle(tid, projects)} tab`}
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "inherit",
-                      background: "transparent",
-                      border: 0,
-                      padding: 0,
-                      margin: 0,
-                      color: "inherit",
-                      font: "inherit",
-                      cursor: "pointer",
-                    }}
+              <div className="nsos-window-tabs-scroll">
+                {tabs.map((tid) => (
+                  <div
+                    key={tid}
+                    className={`nsos-window-tab ${activePanel === tid ? "active" : ""}`}
                   >
-                    <span
-                      className="nsos-tab-dot"
+                    <button
+                      type="button"
+                      onClick={() => switchTab(tid)}
+                      aria-label={`Open ${tabTitle(tid, projects)} tab`}
                       style={{
-                        background: tabDotForPanel(tid),
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "inherit",
+                        background: "transparent",
+                        border: 0,
+                        padding: 0,
+                        margin: 0,
+                        color: "inherit",
+                        font: "inherit",
+                        cursor: "pointer",
                       }}
-                    />
-                    {tabTitle(tid, projects)}
-                  </button>
-                  <button
-                    type="button"
-                    className="nsos-tab-close"
-                    aria-label="Close tab"
-                    onClick={() => closeTab(tid)}
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
+                    >
+                      <span
+                        className="nsos-tab-dot"
+                        style={{
+                          background: tabDotForPanel(tid),
+                        }}
+                      />
+                      {tabTitle(tid, projects)}
+                    </button>
+                    {tid !== "home" && (
+                      <button
+                        type="button"
+                        className="nsos-tab-close"
+                        aria-label="Close tab"
+                        onClick={() => closeTab(tid)}
+                      >
+                        ×
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
               <button
                 type="button"
                 className="nsos-command-trigger"

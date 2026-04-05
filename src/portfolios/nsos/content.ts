@@ -16,31 +16,43 @@ export const nsosStats = [
 
 export const nsosExperience = [
   {
-    role: "AI and Backend Development Intern",
-    org: "Florida Community Innovation Foundation",
+    role: "Backend Team Lead",
+    org: "Florida Community Innovation · FCI",
     date: "2024 — Present",
     current: true,
-    desc: "Owns backend direction for the Florida Resource Map: RAG pipelines, scalable APIs, and leading a six-person engineering effort.",
+    desc: "Owns backend direction for the Florida Resource Map. Built RAG pipelines and scalable APIs, leading a six-person engineering team. LangChain, vector search, production infrastructure.",
   },
   {
-    role: "Scrum Master and Team Lead",
-    org: "Project ALIGN, University of Florida",
-    date: "2025",
+    role: "Undergraduate Researcher",
+    org: "UF Li Lab · University of Florida",
+    date: "2025 — Present",
     current: true,
-    desc: "Literacy-alignment scoring: clustering, XGBoost, and evaluation design for AI-generated stories at scale.",
+    desc: "Biomedical ML research. Biosignal processing, signal fusion pipelines, and applied machine learning for clinical inference tasks.",
+  },
+  {
+    role: "Scrum Master & Team Lead",
+    org: "Project ALIGN · University of Florida",
+    date: "2025",
+    current: false,
+    desc: "Led engineering effort for literacy-alignment scoring of AI-generated stories. Designed clustering pipeline, XGBoost classifier, and evaluation framework at scale.",
+  },
+  {
+    role: "Computational Team Lead",
+    org: "UF iGEM · University of Florida",
+    date: "2024 — 2025",
+    current: false,
+    desc: "Led computational work for UF's iGEM team. Protein structure prediction, biological sequence analysis, and ML-assisted design.",
   },
   {
     role: "Research Intern",
-    org: "Florida International University",
+    org: "FIU BioRG · Florida International University",
     date: "2023 — 2024",
     current: false,
-    desc: "Bioinformatics-focused AI: domain-tuned language models and biological sequence analysis.",
+    desc: "Bioinformatics-focused AI research. Domain-tuned language models and biological sequence analysis.",
   },
 ] as const;
 
-export const nsosAboutWhoami = `Software engineer at the University of Florida, building the layer between ML research and shipping products — retrieval systems, backend infrastructure, and AI pipelines that hold up under real constraints.
-
-I care most about biomedical signal fusion, civic data systems, and applied ML where the evaluation has to be honest.`;
+export const nsosAboutWhoami = `CS + Math @ UF. Most of my work lives at the edge of biomedical ML, product management, and systems engineering.`;
 
 export const nsosSkills = [
   "TypeScript",
