@@ -1145,6 +1145,16 @@
   margin-bottom: 4px;
 }
 
+.nsos-pd-link {
+  color: var(--nsos-accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.nsos-pd-link:hover {
+  text-decoration: underline;
+}
+
 .nsos-signal-bg {
   position: absolute;
   inset: 0;

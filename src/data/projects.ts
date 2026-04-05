@@ -12,6 +12,8 @@ export interface Project {
   award?: string;
   /** Tech tags; falls back to metrics values in UI when omitted */
   stack?: string[];
+  /** Repo or live site opened from project detail */
+  projectUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -28,6 +30,7 @@ export const projects: Project[] = [
       { value: "5", label: "signal modalities" },
       { value: "XGBoost", label: "architecture" },
     ],
+    projectUrl: "https://github.com/NSang22/NeuroPhenotype",
   },
   {
     id: "rna-seq",
@@ -45,6 +48,7 @@ export const projects: Project[] = [
       { value: "bulk RNA-seq", label: "sequencing modality" },
     ],
     stack: ["R", "DESeq2", "GSEA", "RNA-seq", "bioinformatics", "ggplot2"],
+    projectUrl: "https://github.com/NSang22/BioinformaticsProject",
   },
   {
     id: "buddy",
@@ -60,6 +64,7 @@ export const projects: Project[] = [
       { value: "Solana escrow", label: "mechanism" },
       { value: "1st Place", label: "UF SASE" },
     ],
+    projectUrl: "https://github.com/NSang22/buddylockin",
   },
   {
     id: "patchlab",
@@ -74,6 +79,7 @@ export const projects: Project[] = [
       { value: "Snowflake", label: "timeline storage" },
       { value: "Hacklytics 2026", label: "winner" },
     ],
+    projectUrl: "https://github.com/NSang22/PatchLab",
   },
   {
     id: "bmo-care",
@@ -89,6 +95,7 @@ export const projects: Project[] = [
       { value: "Raspberry Pi", label: "deployment" },
       { value: "Continuous", label: "bedside monitoring" },
     ],
+    projectUrl: "https://github.com/NSang22/BMO-Care",
   },
   {
     id: "datasmart",
@@ -103,6 +110,7 @@ export const projects: Project[] = [
       { value: "Solana", label: "micropayments" },
       { value: "300+", label: "participants" },
     ],
+    projectUrl: "https://github.com/NSang22/DataSmart",
   },
   {
     id: "florida-resource-map",
@@ -117,5 +125,6 @@ export const projects: Project[] = [
       { value: "LangChain", label: "RAG pipelines" },
       { value: "Active", label: "deployment" },
     ],
+    projectUrl: "https://www.floridaresourcemap.org/",
   },
 ];

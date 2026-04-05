@@ -957,6 +957,21 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
                 ))}
               </div>
             </motion.div>
+            {p.projectUrl ? (
+              <motion.div className="nsos-pd-sec" variants={nsosRevealChild}>
+                <h2>{"// link"}</h2>
+                <p>
+                  <a
+                    href={p.projectUrl}
+                    className="nsos-pd-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {p.projectUrl.replace(/^https?:\/\//, "")}
+                  </a>
+                </p>
+              </motion.div>
+            ) : null}
           </div>
           {isRnaSeq && (
             <aside className="nsos-project-side">
