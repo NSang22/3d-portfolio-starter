@@ -20,7 +20,14 @@ export const nsosExperience = [
     org: "Florida Community Innovation · FCI",
     date: "2024 — Present",
     current: true,
-    desc: "Owns backend direction for the Florida Resource Map. Built RAG pipelines and scalable APIs, leading a six-person engineering team. LangChain, vector search, production infrastructure.",
+    desc: "Own backend direction for the Florida Resource Map. Built RAG pipelines and scalable APIs, leading a six-person engineering team. LangChain, vector search, production infrastructure.",
+  },
+  {
+    role: "Computational Team Lead",
+    org: "UF iGEM · University of Florida",
+    date: "2026 - PRESENT",
+    current: true,
+    desc: "Leading computational work for UF's iGEM team. Protein structure prediction, biological sequence analysis, and ML-assisted design.",
   },
   {
     role: "Undergraduate Researcher",
@@ -30,18 +37,18 @@ export const nsosExperience = [
     desc: "Biomedical ML research. Biosignal processing, signal fusion pipelines, and applied machine learning for clinical inference tasks.",
   },
   {
+    role: "Backend Developer",
+    org: "Stealth Startup · Music Tech",
+    date: "Summer 2025",
+    current: false,
+    desc: "Built backend infrastructure for a cross-platform music collaboration app. Real-time messaging, rate-limited content APIs, and ML recommendation endpoints. Served 400+ beta users.",
+  },
+  {
     role: "Scrum Master & Team Lead",
     org: "Project ALIGN · University of Florida",
     date: "2025",
     current: false,
     desc: "Led engineering effort for literacy-alignment scoring of AI-generated stories. Designed clustering pipeline, XGBoost classifier, and evaluation framework at scale.",
-  },
-  {
-    role: "Computational Team Lead",
-    org: "UF iGEM · University of Florida",
-    date: "2024 — 2025",
-    current: false,
-    desc: "Led computational work for UF's iGEM team. Protein structure prediction, biological sequence analysis, and ML-assisted design.",
   },
   {
     role: "Research Intern",
