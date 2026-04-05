@@ -44,6 +44,21 @@ type Props = {
 };
 
 const ROOT_NAME = "nikhil-portfolio";
+
+/** Resolved before path lookup — `open github|linkedin|email` works from any cwd. */
+const GLOBAL_OPEN_ALIASES: Record<string, string> = {
+  github: "https://github.com/NSang22",
+  linkedin: "https://www.linkedin.com/in/nikhilsangamkar/",
+  email: "mailto:nsangamkar1222@gmail.com",
+};
+
+function resolveGlobalOpenUrl(target: string | undefined): string | null {
+  if (!target?.trim()) return null;
+  const key = target.trim().split("/").filter(Boolean).pop()?.toLowerCase();
+  if (!key) return null;
+  return GLOBAL_OPEN_ALIASES[key] ?? null;
+}
+
 const TERMINAL_COMMANDS = [
   "help",
   "pwd",
@@ -211,6 +226,7 @@ function buildFileSystem(projects: Project[]): FolderNode {
         content: [
           "nsOS virtual filesystem.",
           "Use help, ls, cd, pwd, cat, open, tree, clear.",
+          "External links: open github | open linkedin | open email (work from any directory).",
         ],
       },
     ],
@@ -500,6 +516,19 @@ export default function NsosTerminal({
 
     if (command === "open") {
       const target = args[0];
+      const globalUrl = resolveGlobalOpenUrl(target);
+      if (globalUrl) {
+        openExternal(globalUrl);
+        const label =
+          target!.trim().split("/").filter(Boolean).pop() ?? target!.trim();
+        nextEntries.push({
+          kind: "output",
+          lines: [`Opening ${label}...`],
+        });
+        appendEntries(nextEntries);
+        return;
+      }
+
       const resolved = resolveNode(root, cwd, target);
       if (!target || !resolved) {
         nextEntries.push({
@@ -596,7 +625,15 @@ export default function NsosTerminal({
     }
 
     const pathValue = endsWithSpace ? "" : tokens[tokens.length - 1] ?? "";
-    const suggestions = getPathSuggestions(root, cwd, pathValue);
+    const pathSuggestions = getPathSuggestions(root, cwd, pathValue);
+    const partial = pathValue.split("/").pop()?.toLowerCase() ?? "";
+    const globalOpenMatches =
+      command === "open"
+        ? Object.keys(GLOBAL_OPEN_ALIASES).filter((name) => name.startsWith(partial))
+        : [];
+    const suggestions = [
+      ...new Set([...globalOpenMatches, ...pathSuggestions]),
+    ];
     if (suggestions.length === 1) {
       const completed = suggestions[0] ?? pathValue;
       const prefix = endsWithSpace ? input : input.slice(0, input.length - pathValue.length);
