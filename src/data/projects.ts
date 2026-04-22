@@ -30,6 +30,18 @@ export const projects: Project[] = [
       { value: "5", label: "signal modalities" },
       { value: "XGBoost", label: "architecture" },
     ],
+    stack: [
+      "Python",
+      "XGBoost",
+      "Claude API",
+      "AD623 amp",
+      "EEG hardware",
+      "signal processing",
+      "LangChain",
+      "HPO extraction",
+      "scikit-learn",
+      "NumPy",
+    ],
     projectUrl: "https://github.com/NSang22/NeuroPhenotype",
   },
   {

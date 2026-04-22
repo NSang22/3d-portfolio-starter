@@ -233,43 +233,6 @@ export default function NsosFileTree({
               <span className="nsos-file-name">contact.sh</span>
             </button>
 
-            <div className={`nsos-folder nsos-d1 ${isOpen("fp:config") ? "open" : ""}`}>
-              <div
-                className="nsos-folder-header"
-                onClick={() => toggleFolder("fp:config")}
-                onKeyDown={folderHeaderKeyHandler(() => toggleFolder("fp:config"))}
-                role="button"
-                tabIndex={0}
-                {...hoverHandlers("Tech stack and skills")}
-              >
-                <span className="nsos-folder-chevron">▶</span>
-                <span className="nsos-folder-icon">📁</span>
-                <span className="nsos-folder-name" style={{ opacity: 0.6 }}>
-                  .config
-                </span>
-              </div>
-              <div className="nsos-folder-children">
-                <div
-                  className="nsos-file-item nsos-d1"
-                  style={{ opacity: 0.4, cursor: "default" }}
-                >
-                  <span className="nsos-file-icon" style={{ color: "var(--nsos-text-muted)" }}>
-                    ◇
-                  </span>
-                  <span className="nsos-file-name">.env.local</span>
-                </div>
-                <div
-                  className="nsos-file-item nsos-d1"
-                  style={{ opacity: 0.4, cursor: "default" }}
-                >
-                  <span className="nsos-file-icon" style={{ color: "var(--nsos-text-muted)" }}>
-                    ◇
-                  </span>
-                  <span className="nsos-file-name">tsconfig.json</span>
-                </div>
-              </div>
-            </div>
-
             <div className={`nsos-folder nsos-d1 ${isOpen("fp:links") ? "open" : ""}`}>
               <div
                 className="nsos-folder-header"

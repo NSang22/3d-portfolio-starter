@@ -287,13 +287,6 @@ export default function NsosShell() {
         onSelect: () => openPanel("contact"),
       },
       {
-        id: "config",
-        icon: "📁",
-        path: ".config",
-        description: "Skills, tools, stack",
-        onSelect: () => openPanel("about"),
-      },
-      {
         id: "readme",
         icon: "○",
         path: "README.md",
