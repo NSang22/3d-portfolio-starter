@@ -185,26 +185,6 @@ function buildFileSystem(projects: Project[]): FolderNode {
       },
       {
         type: "folder",
-        name: ".config",
-        children: [
-          {
-            type: "file",
-            name: ".env.local",
-            content: ["redacted", "Runtime secrets stay off the public shell."],
-          },
-          {
-            type: "file",
-            name: "tsconfig.json",
-            content: [
-              "{",
-              '  "compilerOptions": { "strict": true }',
-              "}",
-            ],
-          },
-        ],
-      },
-      {
-        type: "folder",
         name: "links",
         children: [
           { type: "link", name: "github", href: "https://github.com/NSang22" },
