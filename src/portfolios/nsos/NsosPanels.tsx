@@ -598,9 +598,6 @@ function NsosHomePanel({
           </motion.div>
           <motion.div variants={nsosRevealChild}>
             <p className="nsos-home-tagline">
-              Building the engineering layer between AI and real-world systems.
-            </p>
-            <p className="nsos-home-tagline">
               CS + Math @ University of Florida.
             </p>
           </motion.div>
