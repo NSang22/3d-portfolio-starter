@@ -1020,6 +1020,14 @@
   background: var(--nsos-accent-dim);
   color: var(--nsos-accent);
 }
+.nsos-ptag-fullstack {
+  background: #f9731633;
+  color: #fb923c;
+}
+.nsos-ptag-aerospace {
+  background: #6366f133;
+  color: #818cf8;
+}
 
 .nsos-project-card h3 {
   font-family: var(--font-nsos-sans), sans-serif;
@@ -1364,6 +1372,41 @@
   overflow: hidden;
 }
 
+.nsos-driftzero-art {
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  padding-left: 24px;
+  min-height: 280px;
+}
+
+.nsos-driftzero-art-copy {
+  margin-bottom: 14px;
+}
+
+.nsos-driftzero-art-label {
+  display: block;
+  font-family: var(--font-nsos-sans), sans-serif;
+  font-size: 12px;
+  color: var(--nsos-text-muted);
+  letter-spacing: 0.02em;
+}
+
+.nsos-driftzero-art-pre {
+  font-family: var(--font-nsos-mono), ui-monospace, monospace;
+  font-size: clamp(5.5px, 0.68vw, 7.5px);
+  line-height: 1.32;
+  color: #818cf8;
+  text-shadow:
+    0 0 18px rgba(99, 102, 241, 0.35),
+    0 0 6px rgba(99, 102, 241, 0.18);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.nsos-driftzero-art-line {
+  white-space: pre;
+  overflow: hidden;
+}
+
 .nsos-volcano-inline {
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   padding-left: 24px;
@@ -1420,6 +1463,14 @@
   }
 
   .nsos-bmocare-art {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-left: 0;
+    padding-top: 20px;
+    min-height: 0;
+  }
+
+  .nsos-driftzero-art {
     border-left: none;
     border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-left: 0;

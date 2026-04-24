@@ -139,4 +139,48 @@ export const projects: Project[] = [
     ],
     projectUrl: "https://www.floridaresourcemap.org/",
   },
+  {
+    id: "researchhub",
+    number: "008",
+    title: "ResearchHub",
+    domains: ["fullstack", "civic"],
+    summary:
+      "Multi-portal web platform connecting undergraduate students with research lab PIs and administrators at UF. Students browse and apply to positions; PIs post openings and manage applicants; admins oversee lab-wide analytics.",
+    detail:
+      "PostgreSQL + Express backend with role-based access control, Supabase auth, email notifications, and resume upload support.",
+    metrics: [
+      { value: "3", label: "user roles" },
+      { value: "175", label: "commits" },
+      { value: "full-stack", label: "architecture" },
+    ],
+    stack: [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "PostgreSQL",
+      "Supabase",
+      "Express",
+    ],
+    projectUrl: "https://github.com/NSang22/research-hub-cen3031",
+  },
+  {
+    id: "drift-zero",
+    number: "009",
+    title: "Drift Zero",
+    domains: ["aerospace", "data"],
+    summary:
+      "Satellite situational awareness system identifying potential collision threats from nearby spacecraft using orbital mechanics and proximity analysis.",
+    detail: "2nd Place, Hackers Track — SCI Initiative Hackathon 2026.",
+    metrics: [
+      { value: "2nd Place", label: "SCI Hackathon 2026" },
+      { value: "Hackers Track", label: "category" },
+    ],
+    stack: [
+      "Python",
+      "orbital mechanics",
+      "satellite tracking",
+      "data analysis",
+    ],
+    projectUrl: "https://github.com/eshadesigns/Drift-Zero",
+  },
 ];

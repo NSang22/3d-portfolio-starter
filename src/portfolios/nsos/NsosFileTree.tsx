@@ -279,16 +279,6 @@ export default function NsosFileTree({
               </div>
             </div>
 
-            <div
-              className="nsos-file-item nsos-d0"
-              style={{ opacity: 0.3, cursor: "default", marginTop: 4 }}
-              {...hoverHandlers("IDE usage guide and quick commands")}
-            >
-              <span className="nsos-file-icon" style={{ color: "var(--nsos-text-muted)" }}>
-                ○
-              </span>
-              <span className="nsos-file-name">README.md</span>
-            </div>
           </div>
         </div>
       </div>

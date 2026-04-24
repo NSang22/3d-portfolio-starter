@@ -19,6 +19,7 @@ import {
 } from "@/portfolios/nsos/content";
 import { BMO_CARE_BLOCK_ART } from "@/portfolios/nsos/bmoCareBlockArt";
 import { PATCHLAB_BLOCK_ART } from "@/portfolios/nsos/patchlabBlockArt";
+import { DRIFT_ZERO_ART } from "@/portfolios/nsos/driftZeroArt";
 
 /** Light / medium / dark shade blocks in Mario-style art → red fills; rest stays base color. */
 function patchlabArtLineNodes(line: string, lineIndex: number): ReactNode {
@@ -125,6 +126,8 @@ function domainPtagClass(d: Domain): string {
   if (d === "bioinformatics") return "nsos-ptag-bioinf";
   if (d === "ml") return "nsos-ptag-ml";
   if (d === "data" || d === "civic") return "nsos-ptag-sys";
+  if (d === "fullstack") return "nsos-ptag-fullstack";
+  if (d === "aerospace") return "nsos-ptag-aerospace";
   return "nsos-ptag-def";
 }
 
@@ -133,6 +136,8 @@ function domainLabel(d: Domain): string {
   if (d === "bioinformatics") return "bioinformatics";
   if (d === "ml") return "ai/ml";
   if (d === "data") return "data";
+  if (d === "fullstack") return "fullstack";
+  if (d === "aerospace") return "aerospace";
   return "civic";
 }
 
@@ -506,6 +511,49 @@ function BmoCareBlockArt() {
             }}
           >
             {line || "\u00a0"}
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function DriftZeroArt() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, { once: true, amount: 0.2 });
+  const lines = DRIFT_ZERO_ART.split("\n");
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className="nsos-driftzero-art"
+      variants={nsosRevealChild}
+      role="img"
+      aria-label="ASCII art for the Drift Zero satellite project"
+    >
+      <div className="nsos-driftzero-art-copy">
+        <span className="nsos-driftzero-art-label" aria-hidden>
+          Drift Zero — orbital proximity
+        </span>
+      </div>
+      <div className="nsos-driftzero-art-pre" aria-hidden>
+        {lines.map((line, i) => (
+          <motion.div
+            key={i}
+            className="nsos-driftzero-art-line"
+            initial={{ opacity: 0, filter: "blur(5px)" }}
+            animate={
+              inView
+                ? { opacity: 1, filter: "blur(0px)" }
+                : { opacity: 0, filter: "blur(5px)" }
+            }
+            transition={{
+              delay: i * 0.03,
+              duration: 0.42,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {line || " "}
           </motion.div>
         ))}
       </div>
@@ -897,7 +945,8 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
   const isBuddy = p.id === "buddy";
   const isPatchlab = p.id === "patchlab";
   const isBmoCare = p.id === "bmo-care";
-  const showProjectAside = isRnaSeq || isBuddy || isPatchlab || isBmoCare;
+  const isDriftZero = p.id === "drift-zero";
+  const showProjectAside = isRnaSeq || isBuddy || isPatchlab || isBmoCare || isDriftZero;
 
   return (
     <div className="nsos-panel active">
@@ -991,6 +1040,11 @@ function ProjectDetailPanel({ project: p }: { project: Project }) {
           {isBmoCare && (
             <aside className="nsos-project-side">
               <BmoCareBlockArt />
+            </aside>
+          )}
+          {isDriftZero && (
+            <aside className="nsos-project-side">
+              <DriftZeroArt />
             </aside>
           )}
         </div>
