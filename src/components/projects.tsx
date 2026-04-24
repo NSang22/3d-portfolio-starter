@@ -6,66 +6,75 @@ import ScrollReveal from "./scrollReveal";
 const projects = [
   {
     id: 1,
+    title: "NeuroPhenotype",
+    description: [
+      "Multimodal rare disease diagnostic copilot fusing EEG, HRV, rPPG, speech, and motion into a 55-feature biomarker vector.",
+      "Built custom battery-powered EEG signal chain + dual-architecture pipeline with XGBoost classifier and Claude API clinical intake.",
+    ],
+    technologies: ["Python", "Flask", "XGBoost", "Claude API", "MNE", "Arduino"],
+  },
+  {
+    id: 2,
+    title: "Buddy: Lock In",
+    description: [
+      "Multiplayer co-working platform with dual-layer AI focus tracking — MediaPipe client-side and Gemini Vision screen analysis.",
+      "Real-time 3D study rooms with pet companions, Solana betting escrow, and ElevenLabs voice AI. Won 1st Place at UF SASE Hackathon.",
+    ],
+    technologies: ["React", "Node.js", "Socket.io", "Gemini", "Solana", "MongoDB"],
+  },
+  {
+    id: 3,
+    title: "PatchLab",
+    description: [
+      "Multimodal game playtesting platform fusing gameplay video, facial emotion inference, and Apple Watch biometrics into a unified timeline.",
+      "Won Most Innovative Use of Sphinx at Hacklytics 2026.",
+    ],
+    technologies: ["Python", "React", "FastAPI", "Snowflake", "OpenCV", "MediaPipe"],
+  },
+  {
+    id: 4,
+    title: "BMO Care",
+    description: [
+      "AI pediatric hospital companion detecting pain and emotional distress in real time using computer vision and wearable sensor fusion.",
+      "Integrated OpenCV facial analysis, Apple Watch biometrics, and voice AI on Raspberry Pi hardware for continuous bedside monitoring.",
+    ],
+    technologies: ["Python", "React", "OpenCV", "NLP", "Raspberry Pi"],
+  },
+  {
+    id: 5,
+    title: "DataSmart",
+    description: [
+      "Natural-language data marketplace with validated SQL generation, Snowflake query execution, and on-chain Solana micropayments.",
+      "Won Best Use of Snowflake API at SwampHacks 2026 (300+ participants).",
+    ],
+    technologies: ["Python", "SQL", "Snowflake", "Solana", "FastAPI"],
+  },
+  {
+    id: 6,
     title: "Florida Resource Map",
     description: [
-      "RAG-powered civic-tech platform surfacing verified social services.",
-      "Built scraping + validation pipelines for structured resource aggregation.",
+      "RAG-powered civic-tech platform surfacing verified social services across Florida.",
+      "Built LangChain scraping and validation pipelines for 500+ nonprofits.",
     ],
     technologies: ["LangChain", "Python", "RAG", "Web Scraping"],
   },
   {
-    id: 2,
-    title: "BMO Care",
-    description: [
-      "AI pediatric hospital companion detecting pain and emotion in real time.",
-      "Multimodal system integrating voice AI, CV, and wearable data.",
-    ],
-    technologies: ["Python", "React", "CV", "NLP", "Raspberry Pi"],
-  },
-  {
-    id: 3,
-    title: "DataSmart",
-    description: [
-      "AI-powered data marketplace enabling natural-language dataset testing.",
-      "Hackathon-winning system with SQL validation + Snowflake integration.",
-    ],
-    technologies: ["Python", "SQL", "Snowflake", "Solana"],
-  },
-  {
-    id: 4,
-    title: "AORA",
-    description: [
-      "AI productivity assistant unifying tasks, calendar, and email via NLP.",
-      "Used to automate scheduling and follow-ups.",
-    ],
-    technologies: ["Python", "LLMs", "REST APIs"],
-  },
-  {
-    id: 5,
+    id: 7,
     title: "Project ALIGN",
     description: [
-      "Evaluated AI-generated literacy stories using ML + statistical modeling.",
-      "Built alignment scoring system with feature extraction + XGBoost.",
+      "Evaluated AI-generated literacy stories against UF curriculum using ML and statistical modeling.",
+      "Built XGBoost + PCA alignment scoring system across 1000+ stories, finding 74% alignment.",
     ],
-    technologies: ["Python", "XGBoost", "PCA"],
+    technologies: ["Python", "XGBoost", "PCA", "Scikit-learn"],
   },
   {
-    id: 6,
-    title: "Zika/Dengue",
+    id: 8,
+    title: "Zika/Dengue Immune Analysis",
     description: [
-      "Analyzed immune response patterns from prior dengue exposure to Zika.",
-      "Modeled cross-reactive immunity using clinical datasets.",
+      "Analyzed how prior dengue exposure alters immune gene expression in Zika-infected children.",
+      "RNA-seq pipeline with DESeq2, GSEA pathway enrichment, spectral clustering, and classifiers.",
     ],
-    technologies: ["R", "Python", "Statistical Modeling"],
-  },
-  {
-    id: 7,
-    title: "Skylink",
-    description: [
-      "C++ flight planner using A* and Dijkstra on large airline datasets.",
-      "Optimizes for travel time and delay risk.",
-    ],
-    technologies: ["C++", "Graph Algorithms"],
+    technologies: ["R", "Python", "DESeq2", "GSEA", "Statistical Modeling"],
   },
 ];
 

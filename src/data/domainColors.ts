@@ -4,6 +4,8 @@ export const DOMAIN_COLORS = {
   civic: "#3B82F6",
   data: "#06B6D4",
   ml: "#A78BFA",
+  fullstack: "#F97316",
+  aerospace: "#6366F1",
 } as const;
 
 export type Domain = keyof typeof DOMAIN_COLORS;
