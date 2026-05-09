@@ -59,6 +59,37 @@ function resolveGlobalOpenUrl(target: string | undefined): string | null {
   return GLOBAL_OPEN_ALIASES[key] ?? null;
 }
 
+/** Match `open neurophenotype`, `open rna_seq.py`, etc. without cd — same paths as virtual FS. */
+function resolveProjectPanelIdFromOpenArg(
+  projects: Project[],
+  raw: string | undefined,
+): string | null {
+  if (!raw?.trim()) return null;
+  const t = raw.trim();
+  const lower = t.toLowerCase();
+  const tail = lower.split("/").filter(Boolean).pop() ?? lower;
+  const baseNoExt = tail.replace(/\.(py|ts|tsx|js)$/i, "");
+
+  for (const p of projects) {
+    const fname = projectFileName(p).toLowerCase();
+    const idLower = p.id.toLowerCase();
+    const underscoreId = p.id.replace(/-/g, "_").toLowerCase();
+    const fnameStem = fname.replace(/\.(py|ts)$/i, "");
+
+    if (
+      tail === fname ||
+      tail === idLower ||
+      tail === underscoreId ||
+      baseNoExt === fnameStem ||
+      baseNoExt === underscoreId ||
+      baseNoExt === idLower.replace(/-/g, "_")
+    ) {
+      return `project:${p.id}`;
+    }
+  }
+  return null;
+}
+
 const TERMINAL_COMMANDS = [
   "help",
   "pwd",
@@ -408,9 +439,8 @@ export default function NsosTerminal({
           "Available commands:",
           "help, pwd, ls [path], cd <path>, cat <file>, open <target>, tree [path], mkdir <dir>, touch <file>, clear",
           "Tips:",
+          "- open neurophenotype | open rna_seq.py | open florida-resource-map (from any cwd)",
           "- cd projects/biotech",
-          "- open neurophenotype.py",
-          "- open rna_seq.py",
           "- open github",
           "- cat mission.txt",
         ],
@@ -504,6 +534,17 @@ export default function NsosTerminal({
         nextEntries.push({
           kind: "output",
           lines: [`Opening ${label}...`],
+        });
+        appendEntries(nextEntries);
+        return;
+      }
+
+      const projectPanelId = resolveProjectPanelIdFromOpenArg(projects, target);
+      if (projectPanelId) {
+        openPanel(projectPanelId);
+        nextEntries.push({
+          kind: "output",
+          lines: [`Opened ${target!.trim()}`],
         });
         appendEntries(nextEntries);
         return;

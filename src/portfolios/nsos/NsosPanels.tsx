@@ -596,7 +596,7 @@ function NsosHomePanel({
               Nikhil <span className="nsos-highlight">Sangamkar</span>
             </h1>
           </motion.div>
-          <motion.div variants={nsosRevealChild}>
+          <motion.div variants={nsosRevealChild}> 
             <p className="nsos-home-tagline">
               CS + Math @ University of Florida.
             </p>

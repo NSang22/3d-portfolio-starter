@@ -660,7 +660,7 @@
 }
 
 .nsos-home-name {
-  font-family: var(--font-nsos-sans), "DM Sans", system-ui, sans-serif;
+  font-family: var(--font-newsreader), "Newsreader", Georgia, serif;
   font-size: clamp(28px, 5vw, 48px);
   font-weight: 700;
   letter-spacing: -1px;
